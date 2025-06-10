@@ -62,10 +62,9 @@ Tecnologías y conceptos aplicados:
 
 ---
 
-## 📈 GitHub Stats
+## 📊 Estadísticas de GitHub
 
-![David's GitHub Stats](https://github-readme-stats.vercel.app/api?username=DavidSchmidt&show_icons=true&theme=dark)
-[![GitHub Streak](https://streak-stats.demolab.com?user=DavidSchmidt&theme=dark)](https://git.io/streak-stats)
+![Lenguajes más usados](https://github-readme-stats.vercel.app/api/top-langs/?username=DavidSchmidt&layout=compact&theme=dark)
 
 ---
 
