@@ -16,10 +16,9 @@
 ![SQLite](https://img.shields.io/badge/-SQLite-003B57?logo=sqlite&logoColor=white)
 ![MySQL](https://img.shields.io/badge/-MySQL-00758F?logo=mysql&logoColor=white)
 ![Flet](https://img.shields.io/badge/-Flet-2563EB?logo=windows11&logoColor=white)
-![Tkinter](https://img.shields.io/badge/-Tkinter-FFCD00?logo=python&logoColor=black)
-![C](https://img.shields.io/badge/-C-A8B9CC?logo=c&logoColor=white)
 ![Git](https://img.shields.io/badge/-Git-F05032?logo=git&logoColor=white)
 ![Looker Studio](https://img.shields.io/badge/-Looker_Studio-4285F4?logo=googleanalytics&logoColor=white)
+![C](https://img.shields.io/badge/-C-A8B9CC?logo=c&logoColor=white)
 
 ---
 
@@ -36,6 +35,13 @@ Análisis exploratorio de un dataset real con limpieza, normalización, detecci�
 Aplicación de escritorio con GUI en Tkinter, usando POO, SQLite3 y ORM Peewee.  
 Incluye validaciones con `re`, manejo de fechas, logs y arquitectura MVC.
 
+### 🧵 Simulador de Sistema Operativo en C (UTN)
+Proyecto universitario de más de 6.000 líneas de código que simula un sistema operativo con planificación de procesos, manejo de hilos, sincronización, uso de sockets y comunicación entre módulos (Kernel, CPU, Memoria, FS).
+Tecnologías y conceptos aplicados:
+- C (POSIX threads, sockets TCP)
+- Planificadores FIFO, Prioridades, Multinivel
+- Comunicación entre procesos (IPC)
+- Sincronización con mutex y semáforos
 ---
 
 ## 🧠 Formación
@@ -50,7 +56,7 @@ Incluye validaciones con `re`, manejo de fechas, logs y arquitectura MVC.
 ## 🧩 Intereses
 
 - Ciencia de datos y visualización de información.  
-- Desarrollo de herramientas interactivas con Flet y Python.  
+- Desarrollo de herramientas interactivas con Python.  
 - Sistemas distribuidos, programación concurrente y simulaciones.  
 - Análisis de rendimiento, dashboards y automatización.
 
@@ -65,7 +71,7 @@ Incluye validaciones con `re`, manejo de fechas, logs y arquitectura MVC.
 
 📬 **Contacto:**  
 📧 [davidadrianschmidt02@gmail.com](mailto:davidadrianschmidt02@gmail.com)  
-📍 Lanús Oeste, Buenos Aires, Argentina
+📍 Remedios de Escalada, Buenos Aires, Argentina
 
 ---
 
