@@ -62,12 +62,6 @@ Tecnologías y conceptos aplicados:
 
 ---
 
-## 📊 Estadísticas de GitHub
-
-![Lenguajes más usados](https://github-readme-stats.vercel.app/api/top-langs/?username=DavidSchmidt&layout=compact&theme=dark)
-
----
-
 📬 **Contacto:**  
 📧 [davidadrianschmidt02@gmail.com](mailto:davidadrianschmidt02@gmail.com)  
 📍 Remedios de Escalada, Buenos Aires, Argentina
