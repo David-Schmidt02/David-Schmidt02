@@ -26,14 +26,13 @@
 ## 📂 Proyectos destacados
 
 ### 🔎 Buscador y Analizador de Pokémon con Flet  
-App gráfica desarrollada en Python con Flet que permite buscar Pokémon, visualizar sus estadísticas, habilidades y generar análisis con pandas y gráficos.
-Link: https://github.com/David-Schmidt02/Pokemon-Data-Analytics 
+App gráfica desarrollada en Python con Flet que permite buscar Pokémon, visualizar sus estadísticas, habilidades y generar análisis con pandas y gráficos.  
+Link: https://github.com/David-Schmidt02/Pokemon-Data-Analytics  
 
 ### 👟 EDA: Ventas de Adidas  
-Análisis exploratorio de un dataset real con limpieza, normalización, detección de outliers y visualización de resultados.  
-🔗 Dashboard en Looker Studio próximamente disponible.
-Link: https://github.com/David-Schmidt02/Exploratory-Data-Analisis-Adidas-Dataset
-Dashboard: https://lookerstudio.google.com/s/gx_SA-TeIAU
+Análisis exploratorio de un dataset real con limpieza, normalización, detección de outliers y visualización de resultados.    
+Link: https://github.com/David-Schmidt02/Exploratory-Data-Analisis-Adidas-Dataset  
+Dashboard: https://lookerstudio.google.com/s/gx_SA-TeIAU  
 
 ### 💻 CRUD en Tkinter + SQLite  
 Aplicación de escritorio con GUI en Tkinter, usando POO, SQLite3 y ORM Peewee.  
