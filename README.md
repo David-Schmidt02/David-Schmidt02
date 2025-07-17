@@ -27,6 +27,7 @@
 
 ### 🔎 Buscador y Analizador de Pokémon con Flet  
 App gráfica desarrollada en Python con Flet que permite buscar Pokémon, visualizar sus estadísticas, habilidades y generar análisis con pandas y gráficos.
+Link: https://github.com/David-Schmidt02/Pokemon-Data-Analytics 
 
 ### 👟 EDA: Ventas de Adidas  
 Análisis exploratorio de un dataset real con limpieza, normalización, detección de outliers y visualización de resultados.  
