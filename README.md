@@ -55,11 +55,7 @@ Tecnologías y conceptos aplicados:
 - 💻 **Ingeniería en Sistemas – UTN FRBA** *(2022 - en curso)*
 
 ---
-## Commits
-![GitHub Stats](https://github-profile-summary-cards.vercel.app/api/cards/stats?username=David-Schmidt02&theme=radical)
-![Top Langs](https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=David-Schmidt02&theme=radical)
-![Commits](https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=David-Schmidt02&theme=radical&utcOffset=8)
---
+
 ## 🧩 Intereses
 
 - Ciencia de datos y visualización de información.  
