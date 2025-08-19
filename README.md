@@ -56,9 +56,9 @@ Tecnologías y conceptos aplicados:
 
 ---
 ## Commits
-![GitHub Stats](https://github-profile-summary-cards.vercel.app/api/cards/stats?username=TU_USUARIO&theme=radical)
-![Top Langs](https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=TU_USUARIO&theme=radical)
-![Commits](https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=TU_USUARIO&theme=radical&utcOffset=8)
+![GitHub Stats](https://github-profile-summary-cards.vercel.app/api/cards/stats?username=David-Schmidt02&theme=radical)
+![Top Langs](https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=David-Schmidt02&theme=radical)
+![Commits](https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=David-Schmidt02&theme=radical&utcOffset=8)
 --
 ## 🧩 Intereses
 
