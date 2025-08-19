@@ -55,11 +55,16 @@ Tecnologías y conceptos aplicados:
 - 💻 **Ingeniería en Sistemas – UTN FRBA** *(2022 - en curso)*
 
 ---
-
+## Commits
+![GitHub Stats](https://github-profile-summary-cards.vercel.app/api/cards/stats?username=TU_USUARIO&theme=radical)
+![Top Langs](https://github-profile-summary-cards.vercel.app/api/cards/repos-per-language?username=TU_USUARIO&theme=radical)
+![Commits](https://github-profile-summary-cards.vercel.app/api/cards/productive-time?username=TU_USUARIO&theme=radical&utcOffset=8)
+--
 ## 🧩 Intereses
 
 - Ciencia de datos y visualización de información.  
-- Desarrollo de herramientas interactivas con Python.  
+- Desarrollo de herramientas interactivas con Python.
+- Desarrollo de herramientas con automatización con Python e IA.
 - Sistemas distribuidos, programación concurrente y simulaciones.  
 - Análisis de rendimiento, dashboards y automatización.
 
