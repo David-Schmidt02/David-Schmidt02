@@ -185,41 +185,84 @@ def tarjeta_lenguajes(datos: dict, p: dict) -> str:
     return svg(ancho, alto, p, "".join(cuerpo), "Lenguajes más usados, por cantidad de commits que los usan")
 
 
+LARGO_INICIAL, LARGO_MAXIMO, CRECE_CADA = 4, 14, 20
+
+
+def largo(comidos: int) -> int:
+    """Segmentos de la víbora: arranca con 4 y suma uno cada 20 días comidos, hasta 14."""
+    return min(LARGO_MAXIMO, LARGO_INICIAL + comidos // CRECE_CADA)
+
+
 def recorrido(posiciones: list[tuple[int, int, int]], azar: random.Random) -> list[tuple[int, int]]:
-    """Camino celda por celda hacia días con contribuciones, con desvíos y vueltas al azar."""
+    """Camino celda por celda hacia días con contribuciones, con desvíos al azar y sin pisarse a sí misma."""
     columnas = max(c for c, _, _ in posiciones) + 1
     pendientes = {(c, f) for c, f, nivel in posiciones if nivel}
-    actual = (0, azar.randrange(7))
-    camino = [actual]
+    camino = [(0, azar.randrange(7))]
+    comidos = 1 if camino[0] in pendientes else 0
+    pendientes.discard(camino[0])
 
-    def mover(hacia):
-        nonlocal actual
-        actual = hacia
-        camino.append(actual)
-        pendientes.discard(actual)
+    def vecinos(celda):
+        c, f = celda
+        return [(c + dc, f + df) for dc, df in ((1, 0), (-1, 0), (0, 1), (0, -1)) if 0 <= c + dc < columnas and 0 <= f + df < 7]
+
+    def cuerpo() -> set:
+        # Al avanzar, la cola libera su casillero: la cabeza no puede entrar en el resto del cuerpo
+        return set(camino[-(largo(comidos) - 1):])
+
+    def primer_paso(destino):
+        """Primer paso del camino más corto hacia el destino esquivando el cuerpo (búsqueda en anchura)."""
+        bloqueadas, origen = cuerpo(), camino[-1]
+        anterior, frente = {origen: None}, [origen]
+        while frente:
+            siguiente = []
+            for celda in frente:
+                if celda == destino:
+                    while anterior[celda] != origen:
+                        celda = anterior[celda]
+                    return celda
+                opciones = vecinos(celda)
+                azar.shuffle(opciones)
+                for v in opciones:
+                    if v not in anterior and v not in bloqueadas:
+                        anterior[v] = celda
+                        siguiente.append(v)
+            frente = siguiente
+        return None
+
+    def hay_espacio(celda) -> bool:
+        """Que desde esa celda queden casilleros libres para todo el cuerpo: así no se mete en un callejón."""
+        bloqueadas = cuerpo() | {celda}
+        necesarias, vistas, frente = largo(comidos) + 2, {celda}, [celda]
+        while frente and len(vistas) < necesarias:
+            celda_actual = frente.pop()
+            for v in vecinos(celda_actual):
+                if v not in vistas and v not in bloqueadas:
+                    vistas.add(v)
+                    frente.append(v)
+        return len(vistas) >= necesarias
+
+    def mover(celda):
+        nonlocal comidos
+        camino.append(celda)
+        if celda in pendientes:
+            pendientes.discard(celda)
+            comidos += 1
 
     while pendientes:
+        actual = camino[-1]
+        libres = [v for v in vecinos(actual) if v not in cuerpo()]
+        seguras = [v for v in libres if hay_espacio(v)] or libres
+        if not libres:
+            break  # encerrada por su propio cuerpo: termina la vuelta
+        if azar.random() < 0.15:  # un desvío al azar
+            mover(azar.choice(seguras))
+            continue
         distancia = lambda d: abs(d[0] - actual[0]) + abs(d[1] - actual[1])
         minima = min(map(distancia, pendientes))
-        cercanos = sorted(d for d in pendientes if distancia(d) <= minima + 3)
-        destino = azar.choice(cercanos)
-        while actual != destino:
-            if azar.random() < 0.18:  # un desvío al azar, sin salirse del calendario
-                c, f = actual
-                vecinos = [(c + dc, f + df) for dc, df in ((1, 0), (-1, 0), (0, 1), (0, -1))
-                           if 0 <= c + dc < columnas and 0 <= f + df < 7]
-                for _ in range(azar.randint(1, 3)):
-                    mover(azar.choice(vecinos))
-                    c, f = actual
-                    vecinos = [(c + dc, f + df) for dc, df in ((1, 0), (-1, 0), (0, 1), (0, -1))
-                               if 0 <= c + dc < columnas and 0 <= f + df < 7]
-                continue
-            pasos = []
-            if actual[0] != destino[0]:
-                pasos.append((actual[0] + (1 if destino[0] > actual[0] else -1), actual[1]))
-            if actual[1] != destino[1]:
-                pasos.append((actual[0], actual[1] + (1 if destino[1] > actual[1] else -1)))
-            mover(azar.choice(pasos))
+        candidatos = sorted(d for d in pendientes if distancia(d) <= minima + 3)
+        azar.shuffle(candidatos)
+        paso = next((x for x in (primer_paso(d) for d in candidatos) if x and x in seguras), None)
+        mover(paso or azar.choice(seguras))
     return camino
 
 
@@ -231,7 +274,7 @@ def ritmo(pasos: int, azar: random.Random) -> list[float]:
             modo = azar.choices(["normal", "rapido", "lento"], weights=[6, 2, 2])[0]
             restantes = azar.randint(4, 14)
         restantes -= 1
-        t += {"normal": 0.45, "rapido": 0.3, "lento": 0.7}[modo] * azar.uniform(0.85, 1.15)
+        t += {"normal": 0.3, "rapido": 0.2, "lento": 0.45}[modo] * azar.uniform(0.85, 1.15)
         if azar.random() < 0.03:
             t += azar.uniform(0.6, 1.4)  # se queda quieta un momento
         tiempos.append(t)
@@ -267,7 +310,7 @@ def vibora(dias, p: dict) -> str:
     reglas, figuras = [], []
     for (c, f), nivel in niveles.items():
         x, y = x0 + c * paso, y0 + f * paso
-        if nivel:
+        if nivel and (c, f) in comido_en:
             momento = comido_en[(c, f)] / duracion * 100
             reglas.append(f"@keyframes c{c}_{f}{{0%,{momento:.2f}%{{fill:{p['niveles'][nivel]}}}{momento + 0.01:.2f}%,99.8%{{fill:{p['vacio']}}}}}"
                           f".c{c}_{f}{{animation:c{c}_{f} {duracion:.1f}s linear infinite}}")
@@ -275,18 +318,16 @@ def vibora(dias, p: dict) -> str:
         else:
             figuras.append(f'<rect x="{x}" y="{y}" width="{celda}" height="{celda}" rx="2" fill="{p["vacio"]}"/>')
 
-    # Arranca con 4 segmentos y suma uno cada 20 días comidos, hasta 14
     momentos = sorted(comido_en.values())
-    largo_inicial, largo_maximo, cada = 4, 14, 20
-    for k in range(largo_maximo):
+    for k in range(LARGO_MAXIMO):
         tam = celda - min(k, 6) * 0.6
         # Cada segmento va siempre k casilleros detrás de la cabeza, ande rápido o lento
         puntos = ";".join(f"{max(0, i - k) / tramos:.5f}" for i in range(len(camino))) + f";{max(0, tramos - k) / tramos:.5f}"
         color = p["naranja"] if k == 0 else p["acento"]
         opacidad = 1 - min(k, 10) * 0.04
         clase = ""
-        if k >= largo_inicial:
-            indice = (k - largo_inicial + 1) * cada - 1
+        if k >= LARGO_INICIAL:
+            indice = (k - LARGO_INICIAL + 1) * CRECE_CADA - 1
             if indice >= len(momentos):
                 break
             aparece = momentos[indice] / duracion * 100
@@ -297,7 +338,7 @@ def vibora(dias, p: dict) -> str:
             f'<rect{clase} x="{-tam / 2:.1f}" y="{-tam / 2:.1f}" width="{tam:.1f}" height="{tam:.1f}" rx="2" fill="{color}" '
             f'opacity="{0 if clase else opacidad:.2f}">'
             f'<animateMotion path="{trazo}" dur="{duracion:.1f}s" repeatCount="indefinite" '
-            f'keyPoints="{puntos}" keyTimes="{momentos_clave}" calcMode="linear"/></rect>'
+            f'keyPoints="{puntos}" keyTimes="{momentos_clave}" calcMode="discrete"/></rect>'
         )
     cuerpo = [f"<style>{''.join(reglas)}</style>", *figuras]
     return svg(ancho, alto, p, "".join(cuerpo), "Víbora que deambula por el calendario y se come los días con contribuciones del último año")
