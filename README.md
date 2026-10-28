@@ -14,19 +14,19 @@ Integro el equipo de Inteligencia Artificial de [Soflex](https://www.soflex.com.
 
 ## Proyectos
 
-<a href="https://github.com/David-Schmidt02/app-ahorro">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/David-Schmidt02/app-ahorro/main/docs/capturas/escritorio-inicio-oscuro.webp">
-    <img src="https://raw.githubusercontent.com/David-Schmidt02/app-ahorro/main/docs/capturas/escritorio-inicio-claro.webp" alt="Pantalla de inicio de Ahorro" width="100%">
-  </picture>
-</a>
-
 | | |
 |---|---|
 | [**Ahorro**](https://github.com/David-Schmidt02/app-ahorro) | Libreta de gastos compartida, en uso diario. FastAPI, SQLite y React en un solo contenedor, con CI y deploy continuo. |
 | [**SAFED**](https://github.com/David-Schmidt02/TP-SO-David-Schmidt) | Sistema operativo distribuido simulado en C, hecho en grupo para la UTN FRBA: kernel, CPU, memoria y filesystem comunicados por sockets, con planificación de hilos y sincronización. |
 | [**EDA de ventas de Adidas**](https://github.com/David-Schmidt02/Exploratory-Data-Analisis-Adidas-Dataset) | Limpieza, detección de outliers, normalización y análisis exploratorio de un dataset real de ventas, con [dashboard en Looker Studio](https://lookerstudio.google.com/s/gx_SA-TeIAU). |
 | **Gym** · *en desarrollo* | Libreta de entrenamiento con rutinas por grupo muscular, carga progresiva automática, semanas de descarga y seguimiento de medidas. |
+
+## Actividad
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com?user=David-Schmidt02&locale=es&theme=github-dark-blue&hide_border=true&date_format=j%20M%5B%20Y%5D">
+  <img src="https://streak-stats.demolab.com?user=David-Schmidt02&locale=es&hide_border=true&date_format=j%20M%5B%20Y%5D" alt="Contribuciones totales en GitHub, racha actual y racha más larga (incluye repos privados)" width="100%">
+</picture>
 
 ## Competencias
 
