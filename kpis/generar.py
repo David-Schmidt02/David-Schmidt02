@@ -229,7 +229,7 @@ def ritmo(pasos: int, azar: random.Random) -> list[float]:
             modo = azar.choices(["normal", "rapido", "lento"], weights=[6, 2, 2])[0]
             restantes = azar.randint(4, 14)
         restantes -= 1
-        t += {"normal": 0.22, "rapido": 0.12, "lento": 0.36}[modo] * azar.uniform(0.85, 1.15)
+        t += {"normal": 0.45, "rapido": 0.3, "lento": 0.7}[modo] * azar.uniform(0.85, 1.15)
         if azar.random() < 0.03:
             t += azar.uniform(0.6, 1.4)  # se queda quieta un momento
         tiempos.append(t)
