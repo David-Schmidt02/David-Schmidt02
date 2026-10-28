@@ -1,75 +1,43 @@
-# 👋 ¡Hola! Soy David Schmidt
+# Hola, soy David Schmidt
 
-🎓 Estudiante de Ingeniería en Sistemas (UTN FRBA) y en formación como Data Scientist y Analista de Business Intelligence.  
-📊 Me especializo en análisis de datos, desarrollo backend con Python y visualización interactiva.  
-💡 Me apasiona transformar datos en conocimiento útil para la toma de decisiones empresariales.
+Desarrollador de software orientado a **backend e IA aplicada**. Trabajo de punta a punta en productos de IA y en sistemas de misión crítica: relevamiento y análisis funcional, arquitectura, implementación y operación en producción. Estudio Ingeniería en Sistemas en la UTN FRBA.
 
----
+## En qué trabajo
 
-## 🚀 Tecnologías y herramientas que uso
+Integro el equipo de Inteligencia Artificial de [Soflex](https://www.soflex.com.ar). Dentro de ese grupo formo parte de dos células chicas a cargo de dos productos: uno de IA aplicada a la extracción y el análisis de información y otro de misión crítica. Los repos son privados; esto es lo que hago:
 
-![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Google Colab](https://img.shields.io/badge/Google_Colab-F9AB00?style=for-the-badge&logo=google-colab&logoColor=white)
-![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
-![NumPy](https://img.shields.io/badge/NumPy-013243?style=for-the-badge&logo=numpy&logoColor=white)
-![Matplotlib](https://img.shields.io/badge/Matplotlib-11557C?style=for-the-badge&logo=matplotlib&logoColor=white)
-![Seaborn](https://img.shields.io/badge/Seaborn-43B8C3?style=for-the-badge&logo=python&logoColor=white)
-![SQLite](https://img.shields.io/badge/SQLite-003B57?style=for-the-badge&logo=sqlite&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
-![Flet](https://img.shields.io/badge/Flet-2563EB?style=for-the-badge&logo=windows11&logoColor=white)
-![Git](https://img.shields.io/badge/Git-F05032?style=for-the-badge&logo=git&logoColor=white)
-![Looker Studio](https://img.shields.io/badge/Looker_Studio-4285F4?style=for-the-badge&logo=googleanalytics&logoColor=white)
-![C](https://img.shields.io/badge/C-A8B9CC?style=for-the-badge&logo=c&logoColor=white)
+- **Asistentes de IA sobre datos heterogéneos:** chats y flujos agénticos que cruzan fuentes estructuradas y no estructuradas, con búsqueda semántica sobre vectores, búsqueda híbrida y tools diseñadas para agentes.
+- **Optimización de pipelines con LLM:** detecto las etapas que se resuelven mejor con modelos específicos y entreno encoders para clasificación y reconocimiento de entidades, desde el armado del dataset hasta la puesta en producción (89,9 % de accuracy en clasificación).
+- **Procesamiento en tiempo real:** streams estables, extracción y almacenamiento de audio, video y transcripciones, sobre servicios contenerizados y resilientes.
+- **Misión crítica:** software para centros de emergencias, desde el relevamiento de los sistemas actuales y la planificación de su reemplazo hasta nuevas funcionalidades con IA.
+- **Análisis, documentación y producto:** documento de alcance, especificaciones, documentación de arquitectura como código, priorización del backlog e investigaciones técnicas.
 
----
+## Proyectos
 
-## 📂 Proyectos destacados
+<a href="https://github.com/David-Schmidt02/app-ahorro">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/David-Schmidt02/app-ahorro/main/docs/capturas/escritorio-inicio-oscuro.webp">
+    <img src="https://raw.githubusercontent.com/David-Schmidt02/app-ahorro/main/docs/capturas/escritorio-inicio-claro.webp" alt="Pantalla de inicio de Ahorro" width="100%">
+  </picture>
+</a>
 
-### 🔎 Buscador y Analizador de Pokémon con Flet  
-App gráfica desarrollada en Python con Flet que permite buscar Pokémon, visualizar sus estadísticas, habilidades y generar análisis con pandas y gráficos.  
-Link: https://github.com/David-Schmidt02/Pokemon-Data-Analytics  
+| | |
+|---|---|
+| [**Ahorro**](https://github.com/David-Schmidt02/app-ahorro) | Libreta de gastos compartida, en uso diario. FastAPI, SQLite y React en un solo contenedor, con CI y deploy continuo. |
+| [**SAFED**](https://github.com/David-Schmidt02/TP-SO-David-Schmidt) | Sistema operativo distribuido simulado en C, hecho en grupo para la UTN FRBA: kernel, CPU, memoria y filesystem comunicados por sockets, con planificación de hilos y sincronización. |
+| [**EDA de ventas de Adidas**](https://github.com/David-Schmidt02/Exploratory-Data-Analisis-Adidas-Dataset) | Limpieza, detección de outliers, normalización y análisis exploratorio de un dataset real de ventas, con [dashboard en Looker Studio](https://lookerstudio.google.com/s/gx_SA-TeIAU). |
+| **Gym** · *en desarrollo* | Libreta de entrenamiento con rutinas por grupo muscular, carga progresiva automática, semanas de descarga y seguimiento de medidas. |
 
-### 👟 EDA: Ventas de Adidas  
-Análisis exploratorio de un dataset real con limpieza, normalización, detección de outliers y visualización de resultados.    
-Link: https://github.com/David-Schmidt02/Exploratory-Data-Analisis-Adidas-Dataset  
-Dashboard: https://lookerstudio.google.com/s/gx_SA-TeIAU  
+## Competencias
 
-### 💻 CRUD en Tkinter + SQLite  
-Aplicación de escritorio con GUI en Tkinter, usando POO, SQLite3 y ORM Peewee.  
-Incluye validaciones con `re`, manejo de fechas, logs y arquitectura MVC.
+**Arquitectura:** microservicios, sistemas en tiempo real, APIs con streaming, Clean Architecture  
+**Lenguajes:** Python, Go, TypeScript, SQL  
+**IA aplicada:** agentes y diseño de tools (MCP, LangGraph), RAG y búsqueda semántica, fine-tuning de encoders, inferencia con vLLM, evaluación  
+**Datos:** PostgreSQL, Elasticsearch, SQL Server, MySQL  
+**Frontend:** Angular + Nx, React  
+**Operación:** Linux, Docker, systemd, CI/CD, observabilidad  
+**Análisis y gestión:** relevamiento, análisis funcional, Docs-as-Code, priorización de backlog, Scrum
 
-### 🧵 Simulador de Sistema Operativo en C (UTN)
-Proyecto universitario de más de 6.000 líneas de código que simula un sistema operativo con planificación de procesos, manejo de hilos, sincronización, uso de sockets y comunicación entre módulos (Kernel, CPU, Memoria, FS).
-Tecnologías y conceptos aplicados:
-- C (POSIX threads, sockets TCP)
-- Planificadores FIFO, Prioridades, Multinivel
-- Comunicación entre procesos (IPC)
-- Sincronización con mutex y semáforos
----
+## Contacto
 
-## 🧠 Formación
-
-- 💼 **Diplomatura en Data Science y Análisis Avanzado** *(2025 - en curso)*  
-- 📊 **Diplomatura en Business Intelligence – GCBA** *(2025 - en curso)*  
-- 🐍 **Diplomatura en Python – [2023–2025]**  
-- 💻 **Ingeniería en Sistemas – UTN FRBA** *(2022 - en curso)*
-
----
-
-## 🧩 Intereses
-
-- Ciencia de datos y visualización de información.  
-- Desarrollo de herramientas interactivas con Python.
-- Desarrollo de herramientas con automatización con Python e IA.
-- Sistemas distribuidos, programación concurrente y simulaciones.  
-- Análisis de rendimiento, dashboards y automatización.
-
----
-
-📬 **Contacto:**  
-📧 [davidadrianschmidt02@gmail.com](mailto:davidadrianschmidt02@gmail.com)  
-📍 Remedios de Escalada, Buenos Aires, Argentina
-
----
-
-⭐ Gracias por visitar mi perfil :)
+[davidadrianschmidt02@gmail.com](mailto:davidadrianschmidt02@gmail.com) · [LinkedIn](https://www.linkedin.com/in/david-adrian-schmidt-bab960266/)
