@@ -183,33 +183,64 @@ def tarjeta_lenguajes(datos: dict, p: dict) -> str:
     return svg(ancho, alto, p, "".join(cuerpo), "Lenguajes más usados, por líneas escritas")
 
 
-def recorrido(posiciones: list[tuple[int, int, int]], semilla: str) -> list[tuple[int, int]]:
-    """Camino celda por celda que va al próximo día con contribuciones más cercano, con algo de azar.
-
-    La semilla es la fecha, así que el recorrido cambia todos los días pero es reproducible.
-    """
-    azar = random.Random(semilla)
+def recorrido(posiciones: list[tuple[int, int, int]], azar: random.Random) -> list[tuple[int, int]]:
+    """Camino celda por celda hacia días con contribuciones, con desvíos y vueltas al azar."""
+    columnas = max(c for c, _, _ in posiciones) + 1
     pendientes = {(c, f) for c, f, nivel in posiciones if nivel}
-    actual = (0, 3)
+    actual = (0, azar.randrange(7))
     camino = [actual]
+
+    def mover(hacia):
+        nonlocal actual
+        actual = hacia
+        camino.append(actual)
+        pendientes.discard(actual)
+
     while pendientes:
         distancia = lambda d: abs(d[0] - actual[0]) + abs(d[1] - actual[1])
         minima = min(map(distancia, pendientes))
-        destino = azar.choice(sorted(d for d in pendientes if distancia(d) <= minima + 1))
+        cercanos = sorted(d for d in pendientes if distancia(d) <= minima + 3)
+        destino = azar.choice(cercanos)
         while actual != destino:
+            if azar.random() < 0.18:  # un desvío al azar, sin salirse del calendario
+                c, f = actual
+                vecinos = [(c + dc, f + df) for dc, df in ((1, 0), (-1, 0), (0, 1), (0, -1))
+                           if 0 <= c + dc < columnas and 0 <= f + df < 7]
+                for _ in range(azar.randint(1, 3)):
+                    mover(azar.choice(vecinos))
+                    c, f = actual
+                    vecinos = [(c + dc, f + df) for dc, df in ((1, 0), (-1, 0), (0, 1), (0, -1))
+                               if 0 <= c + dc < columnas and 0 <= f + df < 7]
+                continue
             pasos = []
             if actual[0] != destino[0]:
                 pasos.append((actual[0] + (1 if destino[0] > actual[0] else -1), actual[1]))
             if actual[1] != destino[1]:
                 pasos.append((actual[0], actual[1] + (1 if destino[1] > actual[1] else -1)))
-            actual = azar.choice(pasos)
-            camino.append(actual)
-            pendientes.discard(actual)
+            mover(azar.choice(pasos))
     return camino
 
 
+def ritmo(pasos: int, azar: random.Random) -> list[float]:
+    """Segundo en que la cabeza llega a cada celda: anda a paso tranquilo, a veces acelera y a veces se frena."""
+    tiempos, t, modo, restantes = [0.0], 0.0, "normal", 0
+    for _ in range(pasos - 1):
+        if restantes == 0:
+            modo = azar.choices(["normal", "rapido", "lento"], weights=[6, 2, 2])[0]
+            restantes = azar.randint(4, 14)
+        restantes -= 1
+        t += {"normal": 0.22, "rapido": 0.12, "lento": 0.36}[modo] * azar.uniform(0.85, 1.15)
+        if azar.random() < 0.03:
+            t += azar.uniform(0.6, 1.4)  # se queda quieta un momento
+        tiempos.append(t)
+    return tiempos
+
+
 def vibora(dias, p: dict) -> str:
-    """Una víbora que busca los días con contribuciones, se los come y crece a medida que come."""
+    """Una víbora que deambula por el calendario, se come los días con contribuciones y crece al comer.
+
+    El azar depende de la fecha: el recorrido y el ritmo cambian todos los días.
+    """
     celda, hueco, x0, y0 = 11, 3, 14, 14
     paso = celda + hueco
     inicio = dias[0][0] - timedelta(days=(dias[0][0].weekday() + 1) % 7)  # el calendario arranca en domingo
@@ -217,23 +248,25 @@ def vibora(dias, p: dict) -> str:
     niveles = {(c, f): nivel for c, f, nivel in posiciones}
     columnas = max(c for c, _, _ in posiciones) + 1
     ancho, alto = x0 * 2 + columnas * paso - hueco, y0 * 2 + 7 * paso - hueco
-    camino = recorrido(posiciones, dias[-1][0].isoformat())
-    segundos_por_paso = 0.05
-    recorrida = len(camino) * segundos_por_paso
-    duracion = recorrida + 2.5  # una pausa al final, con el calendario vacío, antes de volver a empezar
+    azar = random.Random(dias[-1][0].isoformat())
+    camino = recorrido(posiciones, azar)
+    tiempos = ritmo(len(camino), azar)
+    recorrida = tiempos[-1]
+    duracion = recorrida + 4  # una pausa al final, con el calendario vacío, antes de volver a empezar
     centro = lambda c, f: (x0 + c * paso + celda / 2, y0 + f * paso + celda / 2)
     trazo = "M" + " L".join(f"{x:.1f},{y:.1f}" for x, y in (centro(c, f) for c, f in camino))
+    tramos = len(camino) - 1
+    momentos_clave = ";".join(f"{t / duracion:.5f}" for t in tiempos) + ";1"
 
-    comido_en, comidos = {}, 0
+    comido_en = {}
     for i, posicion in enumerate(camino):
         if niveles.get(posicion) and posicion not in comido_en:
-            comido_en[posicion] = i
+            comido_en[posicion] = tiempos[i]
     reglas, figuras = [], []
     for (c, f), nivel in niveles.items():
         x, y = x0 + c * paso, y0 + f * paso
         if nivel:
-            i = comido_en[(c, f)]
-            momento = i * segundos_por_paso / duracion * 100
+            momento = comido_en[(c, f)] / duracion * 100
             reglas.append(f"@keyframes c{c}_{f}{{0%,{momento:.2f}%{{fill:{p['niveles'][nivel]}}}{momento + 0.01:.2f}%,99.8%{{fill:{p['vacio']}}}}}"
                           f".c{c}_{f}{{animation:c{c}_{f} {duracion:.1f}s linear infinite}}")
             figuras.append(f'<rect class="c{c}_{f}" x="{x}" y="{y}" width="{celda}" height="{celda}" rx="2" fill="{p["niveles"][nivel]}"/>')
@@ -243,29 +276,29 @@ def vibora(dias, p: dict) -> str:
     # Arranca con 4 segmentos y suma uno cada 20 días comidos, hasta 14
     momentos = sorted(comido_en.values())
     largo_inicial, largo_maximo, cada = 4, 14, 20
-    puntos = f"0;{recorrida / duracion:.4f};1"
     for k in range(largo_maximo):
         tam = celda - min(k, 6) * 0.6
-        retraso = k * segundos_por_paso
+        # Cada segmento va siempre k casilleros detrás de la cabeza, ande rápido o lento
+        puntos = ";".join(f"{max(0, i - k) / tramos:.5f}" for i in range(len(camino))) + f";{max(0, tramos - k) / tramos:.5f}"
         color = p["naranja"] if k == 0 else p["acento"]
         opacidad = 1 - min(k, 10) * 0.04
-        regla = ""
+        clase = ""
         if k >= largo_inicial:
             indice = (k - largo_inicial + 1) * cada - 1
             if indice >= len(momentos):
                 break
-            aparece = (momentos[indice] * segundos_por_paso + retraso) / duracion * 100
+            aparece = momentos[indice] / duracion * 100
             reglas.append(f"@keyframes s{k}{{0%,{aparece:.2f}%{{opacity:0}}{aparece + 0.01:.2f}%,99.8%{{opacity:{opacidad:.2f}}}}}"
                           f".s{k}{{animation:s{k} {duracion:.1f}s linear infinite}}")
-            regla = f' class="s{k}" opacity="0"'
+            clase = f' class="s{k}"'
         figuras.append(
-            f'<rect{regla} x="{-tam / 2:.1f}" y="{-tam / 2:.1f}" width="{tam:.1f}" height="{tam:.1f}" rx="2" fill="{color}"'
-            f'{"" if regla else f" opacity={chr(34)}{opacidad:.2f}{chr(34)}"}>'
-            f'<animateMotion path="{trazo}" dur="{duracion:.1f}s" begin="-{duracion - retraso:.2f}s" repeatCount="indefinite" '
-            f'keyPoints="0;1;1" keyTimes="{puntos}" calcMode="linear"/></rect>'
+            f'<rect{clase} x="{-tam / 2:.1f}" y="{-tam / 2:.1f}" width="{tam:.1f}" height="{tam:.1f}" rx="2" fill="{color}" '
+            f'opacity="{0 if clase else opacidad:.2f}">'
+            f'<animateMotion path="{trazo}" dur="{duracion:.1f}s" repeatCount="indefinite" '
+            f'keyPoints="{puntos}" keyTimes="{momentos_clave}" calcMode="linear"/></rect>'
         )
     cuerpo = [f"<style>{''.join(reglas)}</style>", *figuras]
-    return svg(ancho, alto, p, "".join(cuerpo), "Víbora que busca y se come los días con contribuciones del último año")
+    return svg(ancho, alto, p, "".join(cuerpo), "Víbora que deambula por el calendario y se come los días con contribuciones del último año")
 
 
 MESES = ["ene", "feb", "mar", "abr", "may", "jun", "jul", "ago", "sep", "oct", "nov", "dic"]
