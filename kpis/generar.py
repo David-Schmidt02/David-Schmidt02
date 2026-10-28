@@ -171,16 +171,18 @@ def tarjeta_habitos(datos: dict, p: dict) -> str:
 def tarjeta_lenguajes(datos: dict, p: dict) -> str:
     ancho, alto = 410, 230
     cuerpo = [marco(ancho, alto, p), f'<text x="20" y="32" class="titulo">Lenguajes</text>',
-              f'<text x="{ancho - 20}" y="32" class="chico" text-anchor="end">por líneas escritas</text>']
+              f'<text x="{ancho - 20}" y="32" class="chico" text-anchor="end">commits que lo usan</text>']
+    tope = datos["lenguajes"][0]["commits"]
     for i, lenguaje in enumerate(datos["lenguajes"]):
         y = 64 + i * 27
-        bloques = max(1, round(lenguaje["porcentaje"] / 100 * 30))
+        # Raíz cuadrada respecto del primero: el número es el real y los lenguajes chicos no quedan en un punto
+        bloques = max(1, round((lenguaje["commits"] / tope) ** 0.5 * 30))
         color = p["naranja"] if i == 0 else p["acento"]
         cuerpo.append(f'<text x="20" y="{y + 10}" style="font-size:19px">{lenguaje["nombre"]}</text>')
         for b in range(30):
             cuerpo.append(f'<rect x="{120 + b * 7}" y="{y}" width="5" height="10" fill="{color if b < bloques else p["vacio"]}"/>')
-        cuerpo.append(f'<text x="{ancho - 20}" y="{y + 9}" class="chico" text-anchor="end">{str(lenguaje["porcentaje"]).replace(".", ",")} %</text>')
-    return svg(ancho, alto, p, "".join(cuerpo), "Lenguajes más usados, por líneas escritas")
+        cuerpo.append(f'<text x="{ancho - 20}" y="{y + 9}" class="chico" text-anchor="end">{miles(lenguaje["commits"])}</text>')
+    return svg(ancho, alto, p, "".join(cuerpo), "Lenguajes más usados, por cantidad de commits que los usan")
 
 
 def recorrido(posiciones: list[tuple[int, int, int]], azar: random.Random) -> list[tuple[int, int]]:

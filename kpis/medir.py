@@ -16,9 +16,9 @@ LENGUAJES = {
     ".py": "Python", ".go": "Go", ".ts": "TypeScript", ".tsx": "TypeScript", ".js": "JavaScript",
     ".jsx": "JavaScript", ".mjs": "JavaScript", ".c": "C", ".h": "C", ".php": "PHP", ".sql": "SQL",
     ".sh": "Shell", ".java": "Java", ".rs": "Rust", ".kt": "Kotlin",
+    ".html": "HTML/SCSS", ".scss": "HTML/SCSS", ".css": "HTML/SCSS",
 }
 IGNORAR = ("node_modules/", "/dist/", "/vendor/", ".min.", "migrations/")
-MAX_LINEAS_POR_ARCHIVO = 3000  # más que esto en un commit suele ser código generado o copiado
 CARPETAS_EXCLUIDAS = {"node_modules", ".venv", "dist"}
 
 
@@ -42,31 +42,34 @@ def commits_del_autor(repo: Path, autores: list[str]) -> str:
 
 def medir(carpetas: list[Path], autores: list[str]) -> dict:
     vistos: set[str] = set()
-    por_hora, por_dia, lineas = Counter(), Counter(), Counter()
+    # Cada commit suma 1 a cada lenguaje que toca: mide en cuántos commits se usó, no cuánto código hay
+    por_hora, por_dia, por_lenguaje = Counter(), Counter(), Counter()
     for repo in sorted({r for c in carpetas for r in repos_bajo(c)}):
-        actual = None
-        for fila in commits_del_autor(repo, autores).splitlines():
+        actual, tocados = None, set()
+        for fila in commits_del_autor(repo, autores).splitlines() + ["@@fin 1 0"]:
             if fila.startswith("@@"):
+                por_lenguaje.update(tocados)
+                tocados = set()
                 sha, dia, hora = fila[2:].split()
-                actual = None if sha in vistos else sha
+                actual = None if sha in vistos or sha == "fin" else sha
                 if actual:
                     vistos.add(sha)
                     por_dia[int(dia)] += 1
                     por_hora[int(hora)] += 1
             elif actual and fila.strip():
-                agregadas, _quitadas, ruta = fila.split("\t", 2)
+                _agregadas, _quitadas, ruta = fila.split("\t", 2)
                 lenguaje = LENGUAJES.get(Path(ruta).suffix.lower())
-                if lenguaje and agregadas.isdigit() and not any(x in ruta for x in IGNORAR):
-                    lineas[lenguaje] += min(int(agregadas), MAX_LINEAS_POR_ARCHIVO)
-    total_lineas = sum(lineas.values()) or 1
+                if lenguaje and not any(x in ruta for x in IGNORAR):
+                    tocados.add(lenguaje)
+    total = sum(por_lenguaje.values()) or 1
     return {
         "generado": date.today().isoformat(),
         "commits": len(vistos),
         "por_hora": [por_hora[h] for h in range(24)],
         "por_dia_semana": [por_dia[d] for d in range(1, 8)],  # lunes a domingo
         "lenguajes": [
-            {"nombre": nombre, "porcentaje": round(100 * n / total_lineas, 1)}
-            for nombre, n in lineas.most_common(6)
+            {"nombre": nombre, "commits": n, "porcentaje": round(100 * n / total, 1)}
+            for nombre, n in por_lenguaje.most_common(6)
         ],
     }
 

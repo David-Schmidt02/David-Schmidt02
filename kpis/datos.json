@@ -39,27 +39,33 @@
   "lenguajes": [
     {
       "nombre": "Python",
-      "porcentaje": 76.6
+      "commits": 1194,
+      "porcentaje": 53.7
+    },
+    {
+      "nombre": "HTML/SCSS",
+      "commits": 375,
+      "porcentaje": 16.9
     },
     {
       "nombre": "TypeScript",
-      "porcentaje": 11.4
+      "commits": 330,
+      "porcentaje": 14.9
     },
     {
       "nombre": "JavaScript",
-      "porcentaje": 7.8
-    },
-    {
-      "nombre": "Go",
-      "porcentaje": 2.6
+      "commits": 168,
+      "porcentaje": 7.6
     },
     {
       "nombre": "Shell",
-      "porcentaje": 1.1
+      "commits": 98,
+      "porcentaje": 4.4
     },
     {
-      "nombre": "SQL",
-      "porcentaje": 0.2
+      "nombre": "Go",
+      "commits": 33,
+      "porcentaje": 1.5
     }
   ]
 }
