@@ -1,3 +1,8 @@
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/David-Schmidt02/David-Schmidt02/output/perfil-oscura.svg">
+  <img src="https://raw.githubusercontent.com/David-Schmidt02/David-Schmidt02/output/perfil.svg" alt="David Schmidt, desarrollador de software: commits medidos, contribuciones del último año, rachas y horario más activo" width="100%">
+</picture>
+
 # Hola, soy David Schmidt
 
 Desarrollador de software orientado a **backend e IA aplicada**. Trabajo de punta a punta en productos de IA y en sistemas de misión crítica: relevamiento y análisis funcional, arquitectura, implementación y operación en producción. Estudio Ingeniería en Sistemas en la UTN FRBA.
@@ -24,9 +29,25 @@ Integro el equipo de Inteligencia Artificial de [Soflex](https://www.soflex.com.
 ## Actividad
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://streak-stats.demolab.com?user=David-Schmidt02&locale=es&theme=github-dark-blue&hide_border=true&date_format=j%20M%5B%20Y%5D">
-  <img src="https://streak-stats.demolab.com?user=David-Schmidt02&locale=es&hide_border=true&date_format=j%20M%5B%20Y%5D" alt="Contribuciones totales en GitHub, racha actual y racha más larga (incluye repos privados)" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/David-Schmidt02/David-Schmidt02/output/vibora-oscura.svg">
+  <img src="https://raw.githubusercontent.com/David-Schmidt02/David-Schmidt02/output/vibora.svg" alt="Víbora que se come el calendario de contribuciones del último año" width="100%">
 </picture>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/David-Schmidt02/David-Schmidt02/output/anio-oscura.svg">
+  <img src="https://raw.githubusercontent.com/David-Schmidt02/David-Schmidt02/output/anio.svg" alt="Contribuciones por semana en los últimos 12 meses" width="100%">
+</picture>
+
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/David-Schmidt02/David-Schmidt02/output/habitos-oscura.svg">
+  <img src="https://raw.githubusercontent.com/David-Schmidt02/David-Schmidt02/output/habitos.svg" alt="Hábitos: commits por hora del día y por día de la semana" width="49%">
+</picture>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/David-Schmidt02/David-Schmidt02/output/lenguajes-oscura.svg">
+  <img src="https://raw.githubusercontent.com/David-Schmidt02/David-Schmidt02/output/lenguajes.svg" alt="Lenguajes más usados por líneas escritas" width="49%">
+</picture>
+
+<sub>Hábitos y lenguajes medidos sobre mis commits en repos personales y de trabajo; solo se publican totales. Se generan con código propio en <a href="kpis">kpis/</a>.</sub>
 
 ## Competencias
 

@@ -1,0 +1,48 @@
+# Dibuja las tarjetas de KPIs del perfil una vez por día y las publica en la rama `output`.
+# Sin tokens personales: el calendario sale de la página pública del perfil y los hábitos y
+# lenguajes de kpis/datos.json, que se actualiza a mano con kpis/medir.py.
+name: KPIs del perfil
+
+on:
+  schedule:
+    - cron: "0 6 * * *" # 03:00 en Buenos Aires
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["kpis/**", ".github/workflows/kpis.yml"]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: kpis
+  cancel-in-progress: true
+
+jobs:
+  generar:
+    name: Generar KPIs
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Dibujar las tarjetas
+        run: |
+          pip install --quiet pillow
+          python kpis/generar.py "${{ github.repository_owner }}" dist
+
+      - name: Publicar en la rama output
+        working-directory: dist
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          git init --quiet --initial-branch=output
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .
+          git commit --quiet --message "KPIs del $(date +%F)"
+          git push --quiet --force "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" output

@@ -1,0 +1,65 @@
+{
+  "generado": "2026-10-28",
+  "commits": 1951,
+  "por_hora": [
+    42,
+    28,
+    16,
+    3,
+    10,
+    3,
+    0,
+    0,
+    0,
+    34,
+    123,
+    168,
+    213,
+    191,
+    162,
+    225,
+    148,
+    136,
+    114,
+    103,
+    77,
+    68,
+    51,
+    36
+  ],
+  "por_dia_semana": [
+    377,
+    371,
+    332,
+    375,
+    315,
+    75,
+    106
+  ],
+  "lenguajes": [
+    {
+      "nombre": "Python",
+      "porcentaje": 76.6
+    },
+    {
+      "nombre": "TypeScript",
+      "porcentaje": 11.4
+    },
+    {
+      "nombre": "JavaScript",
+      "porcentaje": 7.8
+    },
+    {
+      "nombre": "Go",
+      "porcentaje": 2.6
+    },
+    {
+      "nombre": "Shell",
+      "porcentaje": 1.1
+    },
+    {
+      "nombre": "SQL",
+      "porcentaje": 0.2
+    }
+  ]
+}
