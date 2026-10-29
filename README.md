@@ -22,9 +22,9 @@ Integro el equipo de Inteligencia Artificial de [Soflex](https://www.soflex.com.
 | | |
 |---|---|
 | [**Ahorro**](https://github.com/David-Schmidt02/app-ahorro) | Libreta de gastos compartida, en uso diario. FastAPI, SQLite y React en un solo contenedor, con CI y deploy continuo. |
+| [**Gym**](https://github.com/David-Schmidt02/app-gym) | Libreta de gimnasio para Android, offline y sin servidor, con carga progresiva y semanas de descarga. React y Capacitor, con datos locales y APK compilado en CI. |
 | [**SAFED**](https://github.com/David-Schmidt02/TP-SO-David-Schmidt) | Sistema operativo distribuido simulado en C, hecho en grupo para la UTN FRBA: kernel, CPU, memoria y filesystem comunicados por sockets, con planificación de hilos y sincronización. |
 | [**EDA de ventas de Adidas**](https://github.com/David-Schmidt02/Exploratory-Data-Analisis-Adidas-Dataset) | Limpieza, detección de outliers, normalización y análisis exploratorio de un dataset real de ventas, con [dashboard en Looker Studio](https://lookerstudio.google.com/s/gx_SA-TeIAU). |
-| **Gym** · *en desarrollo* | Libreta de entrenamiento con rutinas por grupo muscular, carga progresiva automática, semanas de descarga y seguimiento de medidas. |
 
 ## Actividad
 
